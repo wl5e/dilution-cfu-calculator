@@ -1,0 +1,2 @@
+# Testing framework for dilution-cfu-calculator
+pytest>=7.0.0
