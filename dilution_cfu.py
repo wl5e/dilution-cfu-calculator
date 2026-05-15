@@ -191,6 +191,7 @@ class DilutionCFUCalculator:
         initial_dilution: float = 0.1,
         dilution_step: float = 10.0,
         num_dilutions: int = 6,
+        countable_min: int = DEFAULT_COUNTABLE_RANGE[0],
         volume_plated_ml: float = 0.1,
         replicates: int = 2,
     ) -> List[DilutionPlate]:
@@ -217,7 +218,7 @@ class DilutionCFUCalculator:
                     break
                 raw = counts[idx]
                 is_tntc = raw < 0
-                is_tftc = raw == 0
+                is_tftc = raw >= 0 and raw < countable_min
                 plates.append(DilutionPlate(
                     dilution_factor=dilution,
                     volume_plated_ml=volume_plated_ml,
